@@ -100,11 +100,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CO2.xaml.cs">
+      <DependentUpon>CO2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Conductivity.xaml.cs">
       <DependentUpon>Conductivity.xaml</DependentUpon>
     </Compile>
     <Compile Include="CSV_DataTable.cs" />
+    <Compile Include="Flaw.xaml.cs">
+      <DependentUpon>Flaw.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GrafSeries.cs" />
+    <Compile Include="Level.xaml.cs">
+      <DependentUpon>Level.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pressure.xaml.cs">
       <DependentUpon>Pressure.xaml</DependentUpon>
     </Compile>
@@ -112,7 +121,19 @@
     <Compile Include="Temperature1.xaml.cs">
       <DependentUpon>Temperature1.xaml</DependentUpon>
     </Compile>
+    <Page Include="CO2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Conductivity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Flaw.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Level.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

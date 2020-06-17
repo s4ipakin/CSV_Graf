@@ -23,12 +23,18 @@ namespace CSV_Reader
         Temperature1 temperature1;
         Pressure pressure;
         Conductivity conductivity;
+        Flaw flaw;
+        Level level;
+        CO2 cO2;
         public MainWindow()
         {
             InitializeComponent();
             temperature1 = new Temperature1();
             pressure = new Pressure();
             conductivity = new Conductivity();
+            flaw = new Flaw();
+            level = new Level();
+            cO2 = new CO2();
             Main.Content = temperature1;
         }
 
@@ -49,6 +55,9 @@ namespace CSV_Reader
                 temperature1.FilePath = filePath;
                 pressure.FilePath = filePath;
                 conductivity.FilePath = filePath;
+                flaw.FilePath = filePath;
+                level.FilePath = filePath;
+                cO2.FilePath = filePath;
             }
         }
 
@@ -60,6 +69,21 @@ namespace CSV_Reader
         private void btnCondClck(object sender, RoutedEventArgs e)
         {
             Main.Content = conductivity;
+        }
+
+        private void btnFlawClck(object sender, RoutedEventArgs e)
+        {
+            Main.Content = flaw;
+        }
+
+        private void btnLewelClck(object sender, RoutedEventArgs e)
+        {
+            Main.Content = level;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = cO2;
         }
     }
 }

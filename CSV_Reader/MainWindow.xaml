@@ -11,9 +11,9 @@
             <Button Content="Температура" MinWidth="200" Click="MainBtcClck"/>
             <Button Content="Давление" MinWidth="200" Margin="10,0,0,0" Click="PressureBtnClk"/>
             <Button Content="Электропроводность" MinWidth="200" Margin="10,0,0,0" Click="btnCondClck" />
-            <Button Content="Скорость протока" MinWidth="200" Margin="10,0,0,0" />
-            <Button Content="Уровень" MinWidth="200" Margin="10,0,0,0" />
-            <Button Content="Содержание углерода" MinWidth="200" Margin="10,0,0,0" />
+            <Button Content="Скорость протока" MinWidth="200" Margin="10,0,0,0" Click="btnFlawClck" />
+            <Button Content="Уровень" MinWidth="200" Margin="10,0,0,0" Click="btnLewelClck" />
+            <Button Content="Содержание углерода" MinWidth="200" Margin="10,0,0,0" Click="Button_Click" />
             <Button Content="Указать лог-файл" MinWidth="100" Margin="10,0,0,0" Click="btnChooseFile_clk" />
         </StackPanel>
         <Frame Name="Main" NavigationUIVisibility="Hidden"/>
