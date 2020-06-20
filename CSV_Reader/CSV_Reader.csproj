@@ -110,7 +110,11 @@
     <Compile Include="Flaw.xaml.cs">
       <DependentUpon>Flaw.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GrafPage.xaml.cs">
+      <DependentUpon>GrafPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GrafSeries.cs" />
+    <Compile Include="Grafs.cs" />
     <Compile Include="Level.xaml.cs">
       <DependentUpon>Level.xaml</DependentUpon>
     </Compile>
@@ -130,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Flaw.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GrafPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

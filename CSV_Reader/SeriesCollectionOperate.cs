@@ -23,20 +23,17 @@ namespace CSV_Reader
             string[] labels = new string[dataTable.Rows.Count];
             Queue<string> queue = new Queue<string>();
             collection.Clear();
+            
             System.DateTime currentDate = startDate;
-            System.DateTime currentTime = startDate;//Convert.ToDateTime(dataTable.Rows[0][timeColumn]);
+            System.DateTime currentTime = startDate;
             System.DateTime stopTime = endDate;
             stopTime = stopTime.AddHours(endHour);
             stopTime = stopTime.AddMinutes(endMin);
             System.DateTime startTime = startDate;
             startTime = startTime.AddHours(startHour);
             startTime = startTime.AddMinutes(startMin);
-            //object[] dateRow = dataTable.Columns[dateColumn];
-            //object[] timeRow = dataTable.Columns[timeColumn];
             object[] values = new object[dataTable.Rows.Count];
             
-            //System.DateTime[] _dateRow = new DateTime[dateRow.Length];
-            //System.DateTime[] _timeRow = new DateTime[timeRow.Length];
             System.DateTime[] dataTime = new DateTime[dataTable.Rows.Count];
             Dictionary<System.DateTime, int> dates = new Dictionary<System.DateTime, int>();
             for (int j = 0; j < dataTable.Rows.Count; j++)
@@ -54,7 +51,7 @@ namespace CSV_Reader
                 }
                 catch (Exception ex) { }
             }
-            int increment = (int)Math.Ceiling(((stopTime - startTime).TotalMinutes) / 720);
+            int increment = (int)Math.Ceiling(((stopTime - startTime).TotalMinutes) / 72);
             
             while (startTime < stopTime)
             {

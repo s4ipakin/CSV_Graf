@@ -12,15 +12,15 @@
     <Grid>
         <lvc:CartesianChart x:Name="Chart_P" Series="{Binding SeriesCollection}" LegendLocation="Right" Margin="0,0,0,272" >
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Содержание органического углерода ВДИ" LabelFormatter="{Binding YFormatter}" MaxValue="110" FontSize="16" FontWeight="UltraBold"></lvc:Axis>
+                <lvc:Axis Title="Содержание органического углерода ВДИ" LabelFormatter="{Binding YFormatter}" MaxValue="1000" FontSize="16" FontWeight="UltraBold"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Title="Время" Labels="{Binding Labels}" FontWeight="Black" FontSize="16"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
-        <DatePicker x:Name="pickedData" Height="24" Margin="712,0,748,207" VerticalAlignment="Bottom"/>
+        <DatePicker x:Name="pickedData" Height="24" Margin="0,0,553,207" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="140"/>
         <Button x:Name="btnFromDays" Content="Построить гравики" HorizontalAlignment="Right" Height="35" Margin="0,0,80,202" VerticalAlignment="Bottom" Width="136" Click="btnFromDays_Click"/>
-        <DatePicker x:Name="PickerDataStop" Height="26" Margin="712,0,747,160" VerticalAlignment="Bottom"/>
+        <DatePicker x:Name="PickerDataStop" Height="26" Margin="0,0,552,164" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="141"/>
         <Button x:Name="btnPrint" Content="Импорт в JPeg" HorizontalAlignment="Right" Height="35" Margin="0,0,80,144" VerticalAlignment="Bottom" Width="136" Click="btnPrintClick"/>
         <CheckBox x:Name="checkGraf1" Content="Содержание органического углерода" HorizontalAlignment="Left" Margin="49,0,0,239" VerticalAlignment="Bottom" Checked="Graf1Chckd" Unchecked="Graf1Unchckd"/>
 

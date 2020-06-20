@@ -67,7 +67,7 @@ namespace CSV_Reader
             dataset.Tables.Add(csvDataTable);
             SeriesCollection = new SeriesCollection();
             Labels = new[] { System.DateTime.Now.ToString() };
-            YFormatter = value => value.ToString() + "%";
+            YFormatter = value => value.ToString() + "CM";
             series = new GrafSeries[1]
             {
                 new GrafSeries("Уровень ВДИ", 35)               

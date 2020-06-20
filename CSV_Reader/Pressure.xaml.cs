@@ -65,7 +65,7 @@ namespace CSV_Reader
             dataset.Tables.Add(csvDataTable);
             SeriesCollection = new SeriesCollection();
             Labels = new[] { System.DateTime.Now.ToString() };
-            YFormatter = value => value.ToString() + "mPa";
+            YFormatter = value => value.ToString() + "Bar";
             series = new GrafSeries[]
             {
                 new GrafSeries("Давление ВВО(основная петля)", 17),
