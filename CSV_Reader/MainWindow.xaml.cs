@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CSV_Reader.GrafSettings;
 
 namespace CSV_Reader
 {
@@ -21,29 +23,48 @@ namespace CSV_Reader
     public partial class MainWindow : Window
     {
         //Temperature1 temperature1;
-        Pressure pressure;
-        GrafConductivity conductivity;
-        Flaw flaw;
-        Level level;
-        CO2 cO2;
-        GrafTemperature grafPage;
+        //Pressure pressure;
+        //GrafConductivity conductivity;
+        GrafPage flaw;
+        GrafPage level;
+        GrafPage cO2;
+        //GrafTemperature grafPage;
+        GrafPage temperature;
+        GrafPage pressure;
+        GrafPage conductivity;
         public MainWindow()
         {
             InitializeComponent();
+            Dictionary<GrafType, GrafSet> grafSets = new Dictionary<GrafType, GrafSet>();
             //temperature1 = new Temperature1();
-            pressure = new Pressure();
-            conductivity = new GrafConductivity("Электропроводимость", "uSm", 1.2);
-            flaw = new Flaw();
-            level = new Level();
-            cO2 = new CO2();
-            grafPage = new GrafTemperature("Температура","°C", 120);
-            Main.Content = grafPage;
+            InitializeSets(grafSets);
+            temperature = new GrafPage(grafSets[GrafType.Temp]);
+            pressure = new GrafPage(grafSets[GrafType.Pressure]);
+            conductivity = new GrafPage(grafSets[GrafType.Conductivity]);
+            //conductivity = new GrafConductivity("Электропроводимость", "uSm", 1.2);
+            flaw = new GrafPage(grafSets[GrafType.Flaw]);
+            level = new GrafPage(grafSets[GrafType.Level]);
+            cO2 = new GrafPage(grafSets[GrafType.CO2]);
+            //grafPage = new GrafTemperature("Температура","°C", 120);
+            Main.Content = temperature;
+        }
+
+        private void InitializeSets(Dictionary<GrafType, GrafSet> grafSets)
+        {
+            grafSets.Clear();
+            var allGrafTypes = Assembly.GetAssembly(typeof(GrafSet)).GetTypes()
+                .Where(t => typeof(GrafSet).IsAssignableFrom(t) && t.IsAbstract == false);
+
+            foreach (var type in allGrafTypes)
+            {
+                GrafSet grafSet = Activator.CreateInstance(type) as GrafSet;
+                grafSets.Add(grafSet.GrafType, grafSet);
+            }           
         }
 
         private void MainBtcClck(object sender, RoutedEventArgs e)
-        {
-            //Main.Content = temperature1;
-            Main.Content = grafPage;
+        {           
+            Main.Content = temperature;
         }
 
         
@@ -55,13 +76,7 @@ namespace CSV_Reader
             if (openFileDialog.ShowDialog() == true)
             {
                 string filePath = openFileDialog.FileName;
-                //temperature1.FilePath = filePath;
-                pressure.FilePath = filePath;
-                conductivity.FilePath = filePath;
-                flaw.FilePath = filePath;
-                level.FilePath = filePath;
-                cO2.FilePath = filePath;
-                grafPage.FilePath = filePath;
+                GrafPage.FilePath = filePath;               
             }
         }
 

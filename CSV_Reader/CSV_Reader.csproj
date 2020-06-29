@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="GrafSeries.cs" />
     <Compile Include="Grafs.cs" />
+    <Compile Include="GrafSettings\GrafType.cs" />
     <Compile Include="Level.xaml.cs">
       <DependentUpon>Level.xaml</DependentUpon>
     </Compile>

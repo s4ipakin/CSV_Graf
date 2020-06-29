@@ -1,4 +1,5 @@
-﻿using LiveCharts;
+﻿using CSV_Reader.GrafSettings;
+using LiveCharts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,9 +33,10 @@ namespace CSV_Reader
         protected string[] _labels;
         protected byte[] hours = new byte[24];
         protected byte[] minutes = new byte[60];
+        
 
-        protected string filePath;
-        public string FilePath
+        protected static string filePath;
+        public static string FilePath
         {
             set
             {
@@ -57,17 +59,17 @@ namespace CSV_Reader
 
         public Func<double, string> YFormatter { get; set; }
 
-        public GrafPage(string yAxesName, string unit, double maxValue)
+        public GrafPage(GrafSet grafSet/*, string yAxesName, string unit, double maxValue*/)
         {
             InitializeComponent();
-            SetSeries();
-            chartAxisY.Title = yAxesName;
-            chartAxisY.MaxValue = maxValue;
+            SetSeries(grafSet);
+            //chartAxisY.Title = yAxesName;
+            //chartAxisY.MaxValue = maxValue;
             csvDataTable = new DataTable();
             dataset.Tables.Add(csvDataTable);
             SeriesCollection = new SeriesCollection();
             Labels = new[] { System.DateTime.Now.ToString() };
-            YFormatter = value => value.ToString() + unit;
+            YFormatter = value => value.ToString() + grafSet.unit;
             for (int i = 0; i < arSeries.Length; i++)
             {
                 SeriesCollection.Add(arSeries[i].LineSeries);
@@ -99,9 +101,11 @@ namespace CSV_Reader
             
         }
 
-        protected virtual void SetSeries()
+        protected virtual void SetSeries(GrafSet grafSet)
         {
-            arSeries = new GrafSeries[] { };
+            arSeries = grafSet.GetSettings();//new GrafSeries[] { };
+            chartAxisY.Title = grafSet.yAxesName;
+            chartAxisY.MaxValue = grafSet.maxValue;
         }
 
         private void ChckbxChecked(object sender, RoutedEventArgs e, int index)
