@@ -46,6 +46,7 @@ namespace CSV_Reader
 
         protected GrafSeries[] arSeries;
         protected Dictionary<int, CheckBox> checkBoxes = new Dictionary<int, CheckBox>();
+        protected Dictionary<int, TextBox> textBoxes = new Dictionary<int, TextBox>();
 
         public string[] Labels
         {
@@ -88,7 +89,22 @@ namespace CSV_Reader
                 keyValuePair.Value.Unchecked += (sender, e) => ChckbxUnchecked(sender, e, keyValuePair.Key);
                 this.grid.Children.Add(keyValuePair.Value);
             }
-            
+
+            for (int i = 0; i < arSeries.Length; i++)
+            {
+               
+                textBoxes.Add(i, new TextBox());
+                textBoxes[i].HorizontalAlignment = HorizontalAlignment.Right;
+                textBoxes[i].VerticalAlignment = VerticalAlignment.Top;
+                double chartTopMargin = Chart_P.Margin.Top;
+                textBoxes[i].Margin = new Thickness(0, chartTopMargin + i * 20, 10, 0);
+            }
+
+            foreach (KeyValuePair<int, TextBox> keyValuePair in textBoxes)
+            {
+                this.grid.Children.Add(keyValuePair.Value);                
+            }
+
             SetArrays();
             comboBoxHourStart.ItemsSource = hours;
             comboBoxHourEnd.ItemsSource = hours;
@@ -186,9 +202,12 @@ namespace CSV_Reader
                     Labels = seriesCollectionOperate.SetValues(SeriesCollection[i].Values, csvDataTable, 1, 2, arSeries[i].Column,
                     (System.DateTime)pickedData.SelectedDate, (System.DateTime)PickerDataStop.SelectedDate, comboBoxHourStart.SelectedIndex,
                     comboBoxHourEnd.SelectedIndex, comboBoxMinuteStart.SelectedIndex, comboBoxMinuteEnd.SelectedIndex);
+                    KeyValuePair<System.DateTime, double> maxValue = new KeyValuePair<DateTime, double>();
+                    maxValue = seriesCollectionOperate.GetMax();
+                    textBoxes[i].Text = maxValue.Key.ToString() + " " + maxValue.Value.ToString();
                 }
             }
-            catch (Exception ex) { System.Windows.MessageBox.Show(ex.Message); }
+            catch (Exception ex) { /*System.Windows.MessageBox.Show(ex.Message);*/ }
         }
     }
 }

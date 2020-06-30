@@ -28,6 +28,7 @@ namespace CSV_Reader
                 PointGeometry = Geometry.Parse("m 25 70.36218 20 -28 -20 22 -8 -6 z"), 
                 PointGeometrySize = 5,
                 PointForeground = System.Windows.Media.Brushes.Gray
+                
             };
             this._name = name;
             this._column = cSVColumn;

@@ -14,7 +14,8 @@ namespace CSV_Reader
     {
 
 
-
+        System.DateTime timeOfMaxValue;
+        double maxValue = 0d;
 
         public string[] SetValues(IChartValues collection, DataTable dataTable, int dateColumn, int timeColumn, int dataColumn,
                                    System.DateTime startDate, System.DateTime endDate, int startHour, int endHour,
@@ -52,9 +53,31 @@ namespace CSV_Reader
                 catch (Exception ex) { }
             }
             int increment = (int)Math.Ceiling(((stopTime - startTime).TotalMinutes) / 72);
+            //System.DateTime timeOfMaxValue = dates.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
             
-            while (startTime < stopTime)
+            int numberOfPoints = 0;
+            int statrIndex = 0;
+            int stopIndex = 0;
+            if (dates.ContainsKey(startTime))
             {
+                statrIndex = dates[startTime];
+            }
+            else
+            {
+                statrIndex = 0;
+            }
+
+            if (dates.ContainsKey(stopTime))
+            {
+                stopIndex = dates[stopTime];
+            }
+            else
+            {
+                stopIndex = dates.Count - 1;
+            }
+
+            while (startTime < stopTime)
+            {               
                 queue.Enqueue(startTime.ToString());
                 if (dates.ContainsKey(startTime))
                 {
@@ -63,13 +86,41 @@ namespace CSV_Reader
                 else
                 {
                     collection.Add(0d);
-                }
+                }                                
                 startTime = startTime.AddMinutes(increment);
+                //numberOfPoints++;
             }
-            labels = queue.ToArray();
-            return labels;
+            //numberOfPoints = numberOfPoints * increment;
+            numberOfPoints = stopIndex - statrIndex;
+
+            Double[] vs = new double[numberOfPoints];
             
-             
+            int indexOfMax = 0;
+            maxValue = 0d;
+            for (int i = 0; i < numberOfPoints - 1; i++)
+            {
+                try
+                {
+                    vs[i] = Convert.ToDouble(values[i + statrIndex]);
+                    if (vs[i] > maxValue)
+                    {
+                        maxValue = vs[i];
+                        indexOfMax = i + statrIndex;
+                    }
+                }
+                catch (Exception ex) { System.Windows.MessageBox.Show(ex.Message + ";" + statrIndex.ToString() + ";" + numberOfPoints.ToString()); break; }
+
+            }
+
+            timeOfMaxValue = dataTime[indexOfMax];
+            MessageBox.Show(timeOfMaxValue.ToString() + ";" + maxValue.ToString() + ";" + statrIndex.ToString() + ";" + numberOfPoints.ToString());
+            labels = queue.ToArray();
+            return labels;            
+        }
+
+        public KeyValuePair<System.DateTime, double> GetMax()
+        {
+            return new KeyValuePair<DateTime, double>(timeOfMaxValue, maxValue);           
         }
     }
 }
