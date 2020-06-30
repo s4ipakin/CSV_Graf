@@ -18,18 +18,20 @@
                 <lvc:Axis Title="Время" Labels="{Binding Labels}" FontWeight="Black" FontSize="16"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
-        <DatePicker x:Name="pickedData" Height="24" Margin="0,0,553,207" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="140"/>
-        <Button x:Name="btnFromDays" Content="Построить гравики" HorizontalAlignment="Right" Height="35" Margin="0,0,80,202" VerticalAlignment="Bottom" Width="136" Click="btnFromDays_Click"/>
-        <DatePicker x:Name="PickerDataStop" Height="26" Margin="0,0,552,164" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="141"/>
-        <Button x:Name="btnPrint" Content="Импорт в JPeg" HorizontalAlignment="Right" Height="35" Margin="0,0,80,144" VerticalAlignment="Bottom" Width="136" Click="btnPrintClick"/>
-        <Label x:Name="label" Content="Начало графика" HorizontalAlignment="Left" Margin="417,0,0,206" VerticalAlignment="Bottom"/>
-        <Label x:Name="label_Copy" Content="Конец графика" HorizontalAlignment="Left" Margin="417,0,0,161" VerticalAlignment="Bottom"/>
-        <Label x:Name="label_Copy1" Content="Часы" HorizontalAlignment="Left" Margin="526,0,0,234" VerticalAlignment="Bottom"/>
-        <Label x:Name="label_Copy2" Content="Минуты" HorizontalAlignment="Left" Margin="604,0,0,234" VerticalAlignment="Bottom"/>
-        <Label x:Name="label_Copy3" Content="Дата" HorizontalAlignment="Left" Margin="712,0,0,234" VerticalAlignment="Bottom"/>
-        <ComboBox x:Name="comboBoxHourStart" HorizontalAlignment="Left" Margin="526,0,0,209" VerticalAlignment="Bottom" Width="60" />
-        <ComboBox x:Name="comboBoxMinuteStart" HorizontalAlignment="Left" Margin="604,0,0,209" VerticalAlignment="Bottom" Width="66"/>
-        <ComboBox x:Name="comboBoxHourEnd" HorizontalAlignment="Left" Margin="526,0,0,164" VerticalAlignment="Bottom" Width="60" />
-        <ComboBox x:Name="comboBoxMinuteEnd" HorizontalAlignment="Left" Margin="604,0,0,164" VerticalAlignment="Bottom" Width="66"/>
+        <DatePicker x:Name="pickedData" Height="24" Margin="0,0,553,155" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="140"/>
+        <Button x:Name="btnFromDays" Content="Построить гравики" HorizontalAlignment="Right" Height="35" Margin="0,0,80,160" VerticalAlignment="Bottom" Width="136" Click="btnFromDays_Click"/>
+        <DatePicker x:Name="PickerDataStop" Height="26" Margin="0,0,552,112" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="141"/>
+        <Button x:Name="btnPrint" Content="Импорт в JPeg" HorizontalAlignment="Right" Height="35" Margin="0,0,80,116" VerticalAlignment="Bottom" Width="136" Click="btnPrintClick"/>
+        <Label x:Name="label" Content="Начало графика" HorizontalAlignment="Left" Margin="417,0,0,154" VerticalAlignment="Bottom"/>
+        <Label x:Name="label_Copy" Content="Конец графика" HorizontalAlignment="Left" Margin="417,0,0,109" VerticalAlignment="Bottom"/>
+        <Label x:Name="label_Copy1" Content="Часы" HorizontalAlignment="Left" Margin="526,0,0,182" VerticalAlignment="Bottom"/>
+        <Label x:Name="label_Copy2" Content="Минуты" HorizontalAlignment="Left" Margin="604,0,0,182" VerticalAlignment="Bottom"/>
+        <Label x:Name="label_Copy3" Content="Дата" HorizontalAlignment="Left" Margin="712,0,0,182" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="comboBoxHourStart" HorizontalAlignment="Left" Margin="526,0,0,157" VerticalAlignment="Bottom" Width="60" />
+        <ComboBox x:Name="comboBoxMinuteStart" HorizontalAlignment="Left" Margin="604,0,0,157" VerticalAlignment="Bottom" Width="66"/>
+        <ComboBox x:Name="comboBoxHourEnd" HorizontalAlignment="Left" Margin="526,0,0,112" VerticalAlignment="Bottom" Width="60" />
+        <ComboBox x:Name="comboBoxMinuteEnd" HorizontalAlignment="Left" Margin="604,0,0,112" VerticalAlignment="Bottom" Width="66"/>
+        <Label x:Name="label1" Content="Сформировал________________" HorizontalAlignment="Left" Height="35" Margin="10,0,0,232" VerticalAlignment="Bottom" Width="206" FontWeight="Normal" FontSize="16" />
+        <Label x:Name="label1_Copy" Content="Утвердил________________" HorizontalAlignment="Left" Height="35" Margin="235,0,0,232" VerticalAlignment="Bottom" Width="206" FontWeight="Normal" FontSize="16"/>
     </Grid>
 </Page>

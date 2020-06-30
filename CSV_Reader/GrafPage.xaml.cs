@@ -47,6 +47,7 @@ namespace CSV_Reader
         protected GrafSeries[] arSeries;
         protected Dictionary<int, CheckBox> checkBoxes = new Dictionary<int, CheckBox>();
         protected Dictionary<int, TextBox> textBoxes = new Dictionary<int, TextBox>();
+        protected Dictionary<int, Label> labels = new Dictionary<int, Label>();
 
         public string[] Labels
         {
@@ -78,7 +79,7 @@ namespace CSV_Reader
                 checkBoxes[i].HorizontalAlignment = HorizontalAlignment.Left;
                 checkBoxes[i].VerticalAlignment = VerticalAlignment.Bottom;
                 double chartBtmMargin = Chart_P.Margin.Bottom;
-                checkBoxes[i].Margin = new Thickness(49,0,0, chartBtmMargin - ((i + 1) * 30));
+                checkBoxes[i].Margin = new Thickness(49,0,0, chartBtmMargin - ((i + 1) * 20) - 80);
                 checkBoxes[i].Content = arSeries[i].Name;
                 checkBoxes[i].IsChecked = true;                
             }
@@ -97,12 +98,28 @@ namespace CSV_Reader
                 textBoxes[i].HorizontalAlignment = HorizontalAlignment.Right;
                 textBoxes[i].VerticalAlignment = VerticalAlignment.Top;
                 double chartTopMargin = Chart_P.Margin.Top;
-                textBoxes[i].Margin = new Thickness(0, chartTopMargin + i * 20, 10, 0);
+                textBoxes[i].Margin = new Thickness(0, chartTopMargin + i * 30 + 20, 10, 0);
             }
 
             foreach (KeyValuePair<int, TextBox> keyValuePair in textBoxes)
             {
                 this.grid.Children.Add(keyValuePair.Value);                
+            }
+
+            for (int i = 0; i < arSeries.Length; i++)
+            {
+
+                labels.Add(i, new Label());
+                labels[i].HorizontalAlignment = HorizontalAlignment.Right;
+                labels[i].VerticalAlignment = VerticalAlignment.Top;
+                double chartTopMargin = Chart_P.Margin.Top;
+                labels[i].Content = arSeries[i].Name;
+                labels[i].Margin = new Thickness(0, chartTopMargin + i * 30, 10, 0);
+            }
+
+            foreach (KeyValuePair<int, Label> keyValuePair in labels)
+            {
+                this.grid.Children.Add(keyValuePair.Value);
             }
 
             SetArrays();
@@ -127,10 +144,14 @@ namespace CSV_Reader
         private void ChckbxChecked(object sender, RoutedEventArgs e, int index)
         {
             arSeries[index].LineSeries.Visibility = Visibility.Visible;
+            textBoxes[index].Visibility = Visibility.Visible;
+            labels[index].Visibility = Visibility.Visible;
         }
         private void ChckbxUnchecked(object sender, RoutedEventArgs e, int index)
         {
             arSeries[index].LineSeries.Visibility = Visibility.Hidden;
+            textBoxes[index].Visibility = Visibility.Hidden;
+            labels[index].Visibility = Visibility.Hidden;
         }
 
         protected void PickedData_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -170,7 +191,7 @@ namespace CSV_Reader
             int height = (int)Chart_P.ActualHeight;
             System.Windows.Point position = Chart_P.PointToScreen(new System.Windows.Point(0d, 0d));
 
-            System.Drawing.Rectangle bounds = new System.Drawing.Rectangle(/*(int)position.X*/0, /*(int)position.Y*/0, width, height);
+            System.Drawing.Rectangle bounds = new System.Drawing.Rectangle(/*(int)position.X*/0, /*(int)position.Y*/0, width, height + 50);
             using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
             {
                 using (Graphics g = Graphics.FromImage(bitmap))
@@ -204,7 +225,7 @@ namespace CSV_Reader
                     comboBoxHourEnd.SelectedIndex, comboBoxMinuteStart.SelectedIndex, comboBoxMinuteEnd.SelectedIndex);
                     KeyValuePair<System.DateTime, double> maxValue = new KeyValuePair<DateTime, double>();
                     maxValue = seriesCollectionOperate.GetMax();
-                    textBoxes[i].Text = maxValue.Key.ToString() + " " + maxValue.Value.ToString();
+                    textBoxes[i].Text = "Max: [" + maxValue.Key.ToString() + "]  " + maxValue.Value.ToString();
                 }
             }
             catch (Exception ex) { /*System.Windows.MessageBox.Show(ex.Message);*/ }

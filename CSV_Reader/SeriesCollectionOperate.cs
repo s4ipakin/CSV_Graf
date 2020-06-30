@@ -108,12 +108,12 @@ namespace CSV_Reader
                         indexOfMax = i + statrIndex;
                     }
                 }
-                catch (Exception ex) { System.Windows.MessageBox.Show(ex.Message + ";" + statrIndex.ToString() + ";" + numberOfPoints.ToString()); break; }
+                catch (Exception ex) { /*System.Windows.MessageBox.Show(ex.Message + ";" + statrIndex.ToString() + ";" + numberOfPoints.ToString());*/ break; }
 
             }
 
             timeOfMaxValue = dataTime[indexOfMax];
-            MessageBox.Show(timeOfMaxValue.ToString() + ";" + maxValue.ToString() + ";" + statrIndex.ToString() + ";" + numberOfPoints.ToString());
+            //MessageBox.Show(timeOfMaxValue.ToString() + ";" + maxValue.ToString() + ";" + statrIndex.ToString() + ";" + numberOfPoints.ToString());
             labels = queue.ToArray();
             return labels;            
         }
