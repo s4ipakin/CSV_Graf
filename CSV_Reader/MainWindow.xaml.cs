@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,6 +29,7 @@ namespace CSV_Reader
         GrafPage flaw;
         GrafPage level;
         GrafPage cO2;
+        
         //GrafTemperature grafPage;
         GrafPage temperature;
         GrafPage pressure;
@@ -46,6 +48,7 @@ namespace CSV_Reader
             level = new GrafPage(grafSets[GrafType.Level]);
             cO2 = new GrafPage(grafSets[GrafType.CO2]);
             //grafPage = new GrafTemperature("Температура","°C", 120);
+            
             Main.Content = temperature;
         }
 
@@ -63,9 +66,11 @@ namespace CSV_Reader
         }
 
         private void MainBtcClck(object sender, RoutedEventArgs e)
-        {           
-            Main.Content = temperature;
+        {             
+            new Thread(() => this.Dispatcher.Invoke(() => Main.Content = temperature)).Start();
+            //Main.Content = temperature;
         }
+        
 
         
         private void btnChooseFile_clk(object sender, RoutedEventArgs e)
@@ -82,27 +87,45 @@ namespace CSV_Reader
 
         private void PressureBtnClk(object sender, RoutedEventArgs e)
         {
-            Main.Content = pressure;
+            //Main.Content = pressure;
+            //new Thread(() => this.Dispatcher.Invoke(() => Main.Content = pressure)).Start();
+            Thread thread = new Thread(() => this.Dispatcher.Invoke(() => Main.Content = pressure));
+            thread.IsBackground = true;
+            thread.Start();
         }
 
         private void btnCondClck(object sender, RoutedEventArgs e)
         {
-            Main.Content = conductivity;
+            //Main.Content = conductivity;
+            new Thread(() => this.Dispatcher.Invoke(() => Main.Content = conductivity)).Start();
         }
 
         private void btnFlawClck(object sender, RoutedEventArgs e)
         {
-            Main.Content = flaw;
+            //Main.Content = flaw;
+            //new Thread(() => this.Dispatcher.Invoke(() => Main.Content = flaw)).Start();
+            Thread thread = new Thread(() => this.Dispatcher.Invoke(() => Main.Content = flaw));
+            thread.IsBackground = true;
+            thread.Start();
         }
 
         private void btnLewelClck(object sender, RoutedEventArgs e)
         {
-            Main.Content = level;
+            //Main.Content = level;
+            //new Thread(() => this.Dispatcher.Invoke(() => Main.Content = level)).Start();
+            Thread thread = new Thread(() => this.Dispatcher.Invoke(() => Main.Content = level));
+            thread.IsBackground = true;
+            thread.Start();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = cO2;
+            //Main.Content = cO2;
+            //new Thread(() => this.Dispatcher.Invoke(() => Main.Content = cO2)).Start();
+            Thread thread = new Thread(() => this.Dispatcher.Invoke(() => Main.Content = cO2));
+            thread.IsBackground = true;
+            thread.Start();
+            
         }
     }
 }

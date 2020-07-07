@@ -39,8 +39,8 @@ namespace CSV_Reader.GrafSettings
             {
                 new GrafSeries("Температура ВВО(основная петля)", 7),
                 new GrafSeries("Температура ВВО(дополнительная петля)", 9),
-                new GrafSeries("Температура ВДИ(для хранения)", 23),
-                new GrafSeries("Температура ВВИ(циркулирующая)", 27),
+                new GrafSeries("Температура ВДИ\r\n(поступающая в емкость для хранения)", 23),
+                new GrafSeries("Температура ВДИ(циркулирующая)", 27),
             };
         }
     }
@@ -57,7 +57,7 @@ namespace CSV_Reader.GrafSettings
             {
                 new GrafSeries("Давление ВВО(основная петля)", 17),
                 new GrafSeries("Давление ВВО(дополнительная петля)", 19),
-                new GrafSeries("Температура ВДИ(для хранения)", 33)
+                new GrafSeries("Давление ВДИ(для хранения)", 33)
             };
         }
     }
@@ -67,7 +67,7 @@ namespace CSV_Reader.GrafSettings
         public override GrafType GrafType => GrafType.Conductivity;
         public override string yAxesName => "Электропроводимость";
         public override string unit => "uSm";
-        public override double maxValue => 1.2;
+        public override double maxValue => 5;
         public override GrafSeries[] GetSettings()
         {
             return new GrafSeries[]
@@ -75,8 +75,8 @@ namespace CSV_Reader.GrafSettings
                 new GrafSeries("Электропроводность ВВО(емкость)", 11),
                 new GrafSeries("Электропроводность ВВО(основная петля)", 13),
                 new GrafSeries("Электропроводность ВВО(дополнительная петля)", 15),
-                new GrafSeries("Электропроводность ВВИ(емкость)", 21),
-                new GrafSeries("Электропроводность ВВИ(циркулирующая)", 25)
+                new GrafSeries("Электропроводность ВДИ(емкость)", 21),
+                new GrafSeries("Электропроводность ВДИ(циркулирующая)", 25)
             };
         }
     }
@@ -102,7 +102,7 @@ namespace CSV_Reader.GrafSettings
     {
         public override GrafType GrafType => GrafType.Level;
         public override string yAxesName => "Уровень";
-        public override string unit => "CM";
+        public override string unit => "%";
         public override double maxValue => 150;
         public override GrafSeries[] GetSettings()
         {

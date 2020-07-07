@@ -15,7 +15,9 @@ namespace CSV_Reader
 
 
         System.DateTime timeOfMaxValue;
+        System.DateTime timeOfMinValue;
         double maxValue = 0d;
+        double minValue = 0d;
 
         public string[] SetValues(IChartValues collection, DataTable dataTable, int dateColumn, int timeColumn, int dataColumn,
                                    System.DateTime startDate, System.DateTime endDate, int startHour, int endHour,
@@ -96,7 +98,9 @@ namespace CSV_Reader
             Double[] vs = new double[numberOfPoints];
             
             int indexOfMax = 0;
+            int indexOfMin = 0;
             maxValue = 0d;
+            minValue = 0d;
             for (int i = 0; i < numberOfPoints - 1; i++)
             {
                 try
@@ -107,12 +111,21 @@ namespace CSV_Reader
                         maxValue = vs[i];
                         indexOfMax = i + statrIndex;
                     }
+                    if (vs[i] != 0d)
+                    {
+                        if ((minValue == 0d) || (vs[i] < minValue))
+                        {
+                            minValue = vs[i];
+                            indexOfMin = i + statrIndex;
+                        }                       
+                    }
                 }
-                catch (Exception ex) { /*System.Windows.MessageBox.Show(ex.Message + ";" + statrIndex.ToString() + ";" + numberOfPoints.ToString());*/ break; }
+                catch (Exception ex) { System.Windows.MessageBox.Show(ex.Message + ";" + statrIndex.ToString() + ";" + numberOfPoints.ToString()); break; }
 
             }
 
             timeOfMaxValue = dataTime[indexOfMax];
+            timeOfMinValue = dataTime[indexOfMin];
             //MessageBox.Show(timeOfMaxValue.ToString() + ";" + maxValue.ToString() + ";" + statrIndex.ToString() + ";" + numberOfPoints.ToString());
             labels = queue.ToArray();
             return labels;            
@@ -121,6 +134,11 @@ namespace CSV_Reader
         public KeyValuePair<System.DateTime, double> GetMax()
         {
             return new KeyValuePair<DateTime, double>(timeOfMaxValue, maxValue);           
+        }
+
+        public KeyValuePair<System.DateTime, double> GetMin()
+        {
+            return new KeyValuePair<DateTime, double>(timeOfMinValue, minValue);
         }
     }
 }
