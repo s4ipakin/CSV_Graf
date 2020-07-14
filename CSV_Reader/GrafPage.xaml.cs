@@ -160,13 +160,12 @@ namespace CSV_Reader
             {
 
                 lebelHightMin = lebelHightMin + Heights[i];
-                labels[i].Margin = new Thickness(0, chartTopMargin + lebelHightMax + i * 20, 10, 0);
-                labelsMin[i].Margin = new Thickness(0, 0, 10, chartBottomMargin + (sumHeight - lebelHightMin) + (arSeries.Length - i)*10) ;
+                labels[i].Margin = new Thickness(0, chartTopMargin + lebelHightMax + i * 10 - 40, 10, 0);
+                labelsMin[i].Margin = new Thickness(0, 0, 10, chartBottomMargin + (sumHeight - lebelHightMin) + (arSeries.Length - i)*10 - 40) ;
                 textBoxesMin[i].Margin = new Thickness(0, 0, 10, labelsMin[i].Margin.Bottom - 10);               
                 textBoxes[i].Margin = new Thickness(0, labels[i].Margin.Top + Heights[i], 10, 0);
                 checkBoxes[i].Margin = new Thickness(49, 0, 0, chartBottomMargin - lebelHightMin - 40);
                 lebelHightMax = lebelHightMax + Heights[i];
-
             }
         }
 

@@ -19,7 +19,7 @@
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
         <DatePicker x:Name="pickedData" Height="24" Margin="726,0,0,119" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-        <Button x:Name="btnFromDays" Content="Построить гравики" HorizontalAlignment="Right" Height="35" Margin="0,0,80,124" VerticalAlignment="Bottom" Width="136" Click="btnFromDays_Click"/>
+        <Button x:Name="btnFromDays" Content="Построить графики" HorizontalAlignment="Right" Height="35" Margin="0,0,80,124" VerticalAlignment="Bottom" Width="136" Click="btnFromDays_Click"/>
         <DatePicker x:Name="PickerDataStop" Height="26" Margin="726,0,0,79" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
         <Button x:Name="btnPrint" Content="Импорт в JPeg" HorizontalAlignment="Right" Height="35" Margin="0,0,80,80" VerticalAlignment="Bottom" Width="136" Click="btnPrintClick"/>
         <Label x:Name="label" Content="Начало графика" HorizontalAlignment="Left" Margin="417,0,0,118" VerticalAlignment="Bottom"/>
