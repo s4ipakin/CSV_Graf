@@ -36,8 +36,8 @@ namespace CSV_Reader
                         }
                         dt.Rows.Add(dr);
                     }
-
                 }
+                
             }
             catch(Exception ex) { }
             

@@ -4,9 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -268,16 +271,20 @@ namespace CSV_Reader
                     g.CopyFromScreen(new System.Drawing.Point((int)position.X, (int)position.Y - 36), System.Drawing.Point.Empty, bounds.Size);
                 }
                 System.Windows.Forms.SaveFileDialog saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-                saveFileDialog1.Filter = "JPeg Image|*.jpg";
-                saveFileDialog1.Title = "Сохранить график как изображение JPeg";
-                saveFileDialog1.ShowDialog();
-                string imagePath = saveFileDialog1.FileName;
+                //saveFileDialog1.Filter = "JPeg Image|*.jpg";
+                //saveFileDialog1.Title = "Сохранить график как изображение JPeg";
+                //saveFileDialog1.ShowDialog();
+                string imagePath = "hern.jpeg";//saveFileDialog1.FileName;
                 bitmap.Save(imagePath, ImageFormat.Jpeg);
+                Process.Start(imagePath);
             }
         }
 
         protected void btnFromDays_Click(object sender, RoutedEventArgs e)
         {
+
+
+
             try
             {
                 csvDataTable = CSV_DataTable.ConvertCSVtoDataTable(filePath);
@@ -286,12 +293,38 @@ namespace CSV_Reader
 
             SeriesCollectionOperate seriesCollectionOperate = new SeriesCollectionOperate();
             try
-            {              
+            {
                 _ = LoopTask(seriesCollectionOperate, arSeries.Length);
             }
             catch (Exception ex) { /*System.Windows.MessageBox.Show(ex.Message);*/ }
+            //DownloadFileFTP();
         }
 
+
+        private void DownloadFileFTP()
+        {
+            string inputfilepath = @"D:\Delete\her.csv";
+            //string inputfilepath = @"D:\Delete\error_ini.xml";
+            string ftphost = "192.168.1.17";
+            //string ftpfilepath = "/media/SD_Card/Trend/log_2020_06_12.csv";
+            string ftpfilepath = "//media/SD_Card/Trend/log_2020_06_12.csv";
+
+            string ftpfullpath = "ftp://" + ftphost + ftpfilepath;
+
+            using (WebClient request = new WebClient())
+            {
+                request.Credentials = new NetworkCredential("admin", "wago");
+                
+                byte[] fileData = request.DownloadData(ftpfullpath);
+
+                using (FileStream file = File.Create(inputfilepath))
+                {
+                    file.Write(fileData, 0, fileData.Length);
+                    file.Close();
+                }
+                MessageBox.Show("Download Complete");
+            }
+        }
 
 
 
