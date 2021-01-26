@@ -1,39 +1,148 @@
-﻿<Page x:Class="CSV_Reader.Flaw"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:CSV_Reader"
-      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-      mc:Ignorable="d" 
-      d:DesignHeight="900" d:DesignWidth="1600"
-      Title="Flaw">
+﻿<Page
+    x:Class="CSV_Reader.Flaw"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:CSV_Reader"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Flaw"
+    d:DesignHeight="900"
+    d:DesignWidth="1600"
+    mc:Ignorable="d">
 
     <Grid>
-        <lvc:CartesianChart x:Name="Chart_P" Series="{Binding SeriesCollection}" LegendLocation="Right" Margin="0,0,0,272" >
+        <lvc:CartesianChart
+            x:Name="Chart_P"
+            Margin="0,0,0,272"
+            LegendLocation="Right"
+            Series="{Binding SeriesCollection}">
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Скорость потока" LabelFormatter="{Binding YFormatter}" MaxValue="10" FontSize="16" FontWeight="UltraBold"></lvc:Axis>
+                <lvc:Axis
+                    Title="Скорость потока"
+                    FontSize="16"
+                    FontWeight="UltraBold"
+                    LabelFormatter="{Binding YFormatter}"
+                    MaxValue="10" />
             </lvc:CartesianChart.AxisY>
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Время" Labels="{Binding Labels}" FontWeight="Black" FontSize="16"></lvc:Axis>
+                <lvc:Axis
+                    Title="Время"
+                    FontSize="16"
+                    FontWeight="Black"
+                    Labels="{Binding Labels}" />
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
-        <DatePicker x:Name="pickedData" Height="24" Margin="0,0,553,207" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="140"/>
-        <Button x:Name="btnFromDays" Content="Построить гравики" HorizontalAlignment="Right" Height="35" Margin="0,0,80,202" VerticalAlignment="Bottom" Width="136" Click="btnFromDays_Click"/>
-        <DatePicker x:Name="PickerDataStop" Height="26" Margin="0,0,552,164" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="141"/>
-        <Button x:Name="btnPrint" Content="Импорт в JPeg" HorizontalAlignment="Right" Height="35" Margin="0,0,80,144" VerticalAlignment="Bottom" Width="136" Click="btnPrintClick"/>
-        <CheckBox x:Name="checkGraf1" Content="Скорость потока ВВО(основная петля)" HorizontalAlignment="Left" Margin="49,0,0,239" VerticalAlignment="Bottom" Checked="Graf1Chckd" Unchecked="Graf1Unchckd"/>
-        <CheckBox x:Name="checkGraf2" Content="Скорость потока ВВО(дополнительная петля)" HorizontalAlignment="Left" Margin="49,0,0,208" VerticalAlignment="Bottom" Checked="Graf2Chckd" Unchecked="Graf2Unchckd"/>
-        <CheckBox x:Name="checkGraf3" Content="Скорость потока ВДИ" HorizontalAlignment="Left" Margin="49,0,0,177" VerticalAlignment="Bottom" Checked="Graf3Chckd" Unchecked="Graf3Unchckd"/>
+        <DatePicker
+            x:Name="pickedData"
+            Width="140"
+            Height="24"
+            Margin="0,0,553,207"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom" />
+        <Button
+            x:Name="btnFromDays"
+            Width="136"
+            Height="35"
+            Margin="0,0,80,202"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Click="btnFromDays_Click"
+            Content="Построить гравики" />
+        <DatePicker
+            x:Name="PickerDataStop"
+            Width="141"
+            Height="26"
+            Margin="0,0,552,164"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom" />
+        <Button
+            x:Name="btnPrint"
+            Width="136"
+            Height="35"
+            Margin="0,0,80,144"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Click="btnPrintClick"
+            Content="Импорт в JPeg" />
+        <CheckBox
+            x:Name="checkGraf1"
+            Margin="49,0,0,239"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Checked="Graf1Chckd"
+            Content="Скорость потока ВВО(основная петля)"
+            Unchecked="Graf1Unchckd" />
+        <CheckBox
+            x:Name="checkGraf2"
+            Margin="49,0,0,208"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Checked="Graf2Chckd"
+            Content="Скорость потока ВВО(дополнительная петля)"
+            Unchecked="Graf2Unchckd" />
+        <CheckBox
+            x:Name="checkGraf3"
+            Margin="49,0,0,177"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Checked="Graf3Chckd"
+            Content="Скорость потока ВДИ"
+            Unchecked="Graf3Unchckd" />
 
-        <ComboBox x:Name="comboBoxHourStart" HorizontalAlignment="Left" Margin="526,0,0,209" VerticalAlignment="Bottom" Width="60" />
-        <ComboBox x:Name="comboBoxMinuteStart" HorizontalAlignment="Left" Margin="604,0,0,209" VerticalAlignment="Bottom" Width="66"/>
-        <ComboBox x:Name="comboBoxHourEnd" HorizontalAlignment="Left" Margin="526,0,0,164" VerticalAlignment="Bottom" Width="60" />
-        <ComboBox x:Name="comboBoxMinuteEnd" HorizontalAlignment="Left" Margin="604,0,0,164" VerticalAlignment="Bottom" Width="66"/>
-        <Label x:Name="label" Content="Начало графика" HorizontalAlignment="Left" Margin="417,0,0,206" VerticalAlignment="Bottom"/>
-        <Label x:Name="label_Copy" Content="Конец графика" HorizontalAlignment="Left" Margin="417,0,0,161" VerticalAlignment="Bottom"/>
-        <Label x:Name="label_Copy1" Content="Часы" HorizontalAlignment="Left" Margin="526,0,0,234" VerticalAlignment="Bottom"/>
-        <Label x:Name="label_Copy2" Content="Минуты" HorizontalAlignment="Left" Margin="604,0,0,234" VerticalAlignment="Bottom"/>
-        <Label x:Name="label_Copy3" Content="Дата" HorizontalAlignment="Left" Margin="712,0,0,234" VerticalAlignment="Bottom"/>
+        <ComboBox
+            x:Name="comboBoxHourStart"
+            Width="60"
+            Margin="526,0,0,209"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom" />
+        <ComboBox
+            x:Name="comboBoxMinuteStart"
+            Width="66"
+            Margin="604,0,0,209"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom" />
+        <ComboBox
+            x:Name="comboBoxHourEnd"
+            Width="60"
+            Margin="526,0,0,164"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom" />
+        <ComboBox
+            x:Name="comboBoxMinuteEnd"
+            Width="66"
+            Margin="604,0,0,164"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom" />
+        <Label
+            x:Name="label"
+            Margin="417,0,0,206"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Начало графика" />
+        <Label
+            x:Name="label_Copy"
+            Margin="417,0,0,161"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Конец графика" />
+        <Label
+            x:Name="label_Copy1"
+            Margin="526,0,0,234"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Часы" />
+        <Label
+            x:Name="label_Copy2"
+            Margin="604,0,0,234"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Минуты" />
+        <Label
+            x:Name="label_Copy3"
+            Margin="712,0,0,234"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Дата" />
     </Grid>
 </Page>

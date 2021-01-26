@@ -36,7 +36,12 @@ namespace CSV_Reader
         protected string[] _labels;
         protected byte[] hours = new byte[24];
         protected byte[] minutes = new byte[60];
-        
+        public static event EventHandler SelectedDateStartChanged;
+        public static event EventHandler SelectedDateStopChanged;
+        public static event EventHandler SelectedHourStartChanged;
+        public static event EventHandler SelectedHourEndChanged;
+        public static event EventHandler SelectedMinuteStartChanged;
+        public static event EventHandler SelectedMinuteEndChanged;
 
         protected static string filePath;
         public static string FilePath
@@ -63,6 +68,10 @@ namespace CSV_Reader
                 OnPropertyChanged("Labels");
             }
         }
+
+        
+
+        
 
         public Func<double, string> YFormatter { get; set; }
 
@@ -142,8 +151,78 @@ namespace CSV_Reader
             this.grid.PreviewMouseRightButtonDown += Grid_PreviewMouseRightButtonDown;
             this.grid.PreviewMouseRightButtonUp += Grid_PreviewMouseRightButtonUp;
             this.Loaded += GrafPage_Loaded;
+            GrafPage.SelectedDateStartChanged += GrafPage_SelectedDateStartChanged;
+            GrafPage.SelectedDateStopChanged += GrafPage_SelectedDateStopChanged;
+            comboBoxHourStart.SelectionChanged += ComboBoxHourStart_SelectionChanged;
+            comboBoxHourEnd.SelectionChanged += ComboBoxHourEnd_SelectionChanged;
+            comboBoxMinuteStart.SelectionChanged += ComboBoxMinuteStart_SelectionChanged;
+            comboBoxMinuteEnd.SelectionChanged += ComboBoxMinuteEnd_SelectionChanged;
+            GrafPage.SelectedHourStartChanged += GrafPage_SelectedHourStartChanged;
+            GrafPage.SelectedHourEndChanged += GrafPage_SelectedHourEndChanged;
+            GrafPage.SelectedMinuteStartChanged += GrafPage_SelectedMinuteStartChanged;
+            GrafPage.SelectedMinuteEndChanged += GrafPage_SelectedMinuteEndChanged;
+        }
 
+        private void GrafPage_SelectedMinuteEndChanged(object sender, EventArgs e)
+        {
+            comboBoxMinuteEnd.SelectedIndex = minuteEnd;
+        }
 
+        private void GrafPage_SelectedMinuteStartChanged(object sender, EventArgs e)
+        {
+            comboBoxMinuteStart.SelectedIndex = minuteStart;
+        }
+
+        private void GrafPage_SelectedHourEndChanged(object sender, EventArgs e)
+        {
+            comboBoxHourEnd.SelectedIndex = hourEnd;
+        }
+
+        private void GrafPage_SelectedHourStartChanged(object sender, EventArgs e)
+        {
+            comboBoxHourStart.SelectedIndex = hourStart;
+        }
+
+        private static int minuteEnd;
+        private void ComboBoxMinuteEnd_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            minuteEnd = comboBoxMinuteEnd.SelectedIndex;
+            if (SelectedMinuteEndChanged != null)
+                SelectedMinuteEndChanged(null, EventArgs.Empty);
+        }
+
+        private static int minuteStart;
+        private void ComboBoxMinuteStart_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            minuteStart = comboBoxMinuteStart.SelectedIndex;
+            if (SelectedMinuteStartChanged != null)
+                SelectedMinuteStartChanged(null, EventArgs.Empty);
+        }
+
+        private static int hourEnd;
+        private void ComboBoxHourEnd_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            hourEnd = comboBoxHourEnd.SelectedIndex;
+            if (SelectedHourEndChanged != null)
+                SelectedHourEndChanged(null, EventArgs.Empty);
+        }
+
+        private static int hourStart;
+        private void ComboBoxHourStart_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            hourStart = comboBoxHourStart.SelectedIndex;
+            if (SelectedHourStartChanged != null)
+                SelectedHourStartChanged(null, EventArgs.Empty);
+        }
+
+        private void GrafPage_SelectedDateStopChanged(object sender, EventArgs e)
+        {
+            PickerDataStop.SelectedDate = selectedDateStop;
+        }
+
+        private void GrafPage_SelectedDateStartChanged(object sender, EventArgs e)
+        {
+            pickedData.SelectedDate = selectedDateStart;
         }
 
         private void GrafPage_Loaded(object sender, RoutedEventArgs e)
@@ -226,14 +305,22 @@ namespace CSV_Reader
             
         }
 
+        private static DateTime? selectedDateStart;
+        private static DateTime? selectedDateStop;
         protected void PickedData_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            PickerDataStop.DisplayDateStart = pickedData.SelectedDate;
+            selectedDateStart = pickedData.SelectedDate;
+            PickerDataStop.DisplayDateStart = selectedDateStart;
+            if (SelectedDateStartChanged != null)
+                SelectedDateStartChanged(null, EventArgs.Empty);
         }
 
         protected void PickerDataStop_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            pickedData.DisplayDateEnd = PickerDataStop.SelectedDate;
+            selectedDateStop = PickerDataStop.SelectedDate;
+            pickedData.DisplayDateEnd = selectedDateStop;
+            if (SelectedDateStopChanged != null)
+                SelectedDateStopChanged(null, EventArgs.Empty);
         }
 
 
